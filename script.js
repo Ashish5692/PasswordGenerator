@@ -18,6 +18,7 @@ let passwordLength = 10;
 let checkCount = 0;
 handleSlider();
 //set strength color to grey
+setIndicator("#ccc");
 
 
 // handleSlider() set password length to UI .It update UI basis on password length value
@@ -26,7 +27,9 @@ handleSlider();
 function handleSlider() {
     inputSlider.value = passwordLength;
     lengthDisplay.innerText = passwordLength; //Length display i.e number coming on UI ...inner Text set to 10 initially
-
+    const min = inputSlider.min;
+    const max = inputSlider.max;
+    inputSlider.style.backgroundSize = ((passwordLength -min)*100/(max-min)) + "% 100%"; //slider width and height
 }
 
 //setting indicator--its task is to set color acc to input parameter of color and set strength of indicator
@@ -203,6 +206,7 @@ generateBtn.addEventListener('click',()=>{
         funcArr.push(generateUpperCase);
     }
 
+    //if checked then store its function inside funcArr[];
     if(lowercaseCheck.checked){
         funcArr.push(generateLowerCase);
     }
@@ -226,7 +230,7 @@ generateBtn.addEventListener('click',()=>{
         let randIndex = getRndInteger(0 , funcArr.length);
         console.log("randIndex" + randIndex);
         password += funcArr[randIndex]();
-    }
+    } //password created
     console.log("Remaining adddition done");
 
     //shuffle the password
